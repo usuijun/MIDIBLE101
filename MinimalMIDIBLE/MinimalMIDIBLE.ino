@@ -38,7 +38,7 @@ BLEPeripheral midiDevice; // create peripheral instance
 BLEService midiSvc("03B80E5A-EDE8-4B33-A751-6CE34EC4C700"); // create service
 
 // create switch characteristic and allow remote device to read and write
-BLECharacteristic midiChar("7772E5DB-3868-4112-A1A9-F2669D106BF3", BLEWrite | BLEWriteWithoutResponse | BLENotify | BLEIndicate, 5);
+BLECharacteristic midiChar("7772E5DB-3868-4112-A1A9-F2669D106BF3", BLEWrite | BLEWriteWithoutResponse | BLENotify | BLERead, 5);
 
 void setup() {
   LOG_SERIAL.begin(9600);
@@ -80,7 +80,7 @@ void loop() {
    * Plays random note every 400ms
    */
   int note = random(0, 127);
-  readMIDI();
+  //readMIDI();
   noteOn(0, note, 127); //loads up midiData buffer
   midiChar.setValue(midiData, 5);//midiData); //posts 5 bytes
   delay(200);
